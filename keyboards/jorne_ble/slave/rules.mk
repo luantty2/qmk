@@ -7,6 +7,8 @@ NRFSDK_ROOT := $(NRFSDK15_ROOT) #Path to nRF SDK v15.0.0
 
 # project specific files
 #SRC =	matrix.c
+SRC += ssd1306.c
+
 NRF_SEPARATE = slave
 
 OLED_ENABLE = yes

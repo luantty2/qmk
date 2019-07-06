@@ -451,9 +451,9 @@ void render_status(struct CharacterMatrix *matrix) {
 void iota_gfx_task_user(void) {
   struct CharacterMatrix matrix;
   matrix_clear(&matrix);
-  if(IS_LEFT_HAND){
+//  if(IS_LEFT_HAND){
     render_status(&matrix);
-  }
+//  }
   matrix_update(&display, &matrix);
 }
 
