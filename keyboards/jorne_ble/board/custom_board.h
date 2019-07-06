@@ -59,9 +59,8 @@ extern "C" {
 #define SWITCH_PIN GPIO(0,26)
 
 // i2c pins
-#define CONFIG_PIN_SCL PIN6
 #define CONFIG_PIN_SDA PIN5
-
+#define CONFIG_PIN_SCL PIN6
 
 //#define NRF_LOG_ENABLED 0
 //#define NRF_LOG_BACKEND_SERIAL_USES_UART 0

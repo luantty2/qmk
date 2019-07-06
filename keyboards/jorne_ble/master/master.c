@@ -65,3 +65,10 @@ void matrix_init_user() {
       iota_gfx_init(!IS_LEFT_HAND);   // turns on the display
   #endif
 }
+
+void matrix_scan_user(void) {
+  #ifdef SSD1306OLED
+    iota_gfx_task();  // this is what updates the display continuously
+  #endif
+}
+

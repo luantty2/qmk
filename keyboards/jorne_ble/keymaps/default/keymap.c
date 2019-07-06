@@ -458,10 +458,3 @@ void iota_gfx_task_user(void) {
 }
 
 #endif
-
-void matrix_scan_user(void) {
-  #ifdef SSD1306OLED
-    iota_gfx_task();  // this is what updates the display continuously
-  #endif
-}
-
