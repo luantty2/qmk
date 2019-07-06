@@ -40,7 +40,6 @@ extern rgblight_config_t rgblight_config;
 void unselect_rows(void);
 void select_row(uint8_t row);
 matrix_row_t read_cols(void);
-
 static bool bootloader_flag = false;
 
 void matrix_init_user() {
@@ -71,11 +70,11 @@ void matrix_init_user() {
       iota_gfx_init(0);   // turns on the display
   #endif
 
-  select_row(0);
+  select_row(3);
   wait_us(50);
   matrix_row_t row = read_cols();
   unselect_rows();
-  if (row == 0b11100) {
+  if (row == 0b111000) {
     delete_bonds();
   } else if (row == 0b10) {
     bootloader_flag = true;
