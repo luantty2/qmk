@@ -6,7 +6,7 @@ LED_BACK_ENABLE = no        # LED backlight (Enable WS2812 RGB underlight.)
 LED_UNDERGLOW_ENABLE = yes  # LED underglow (Enable WS2812 RGB underlight.)
 LED_ANIMATIONS = yes        # LED animations
 OLED_ENABLE = yes            # OLED_ENABLE
-LOCAL_GLCDFONT = false        # use each keymaps "helixfont.h" insted of "common/glcdfont.c"
+LOCAL_GLCDFONT = yes        # use each keymaps "helixfont.h" insted of "common/glcdfont.c"
 
 define HELIX_CUSTOMISE_MSG
   $(info Helix customize)
@@ -55,3 +55,14 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 ifndef QUANTUM_DIR
 	include ../../../../Makefile
 endif
+
+# If you want to change the display of OLED, you need to change here
+SRC +=  ../../lib/glcdfont.c \
+        ../../lib/rgb_state_reader.c \
+        ../../lib/layer_state_reader.c \
+        ../../lib/logo_reader.c \
+        ../../lib/keylogger.c \
+        # ./lib/mode_icon_reader.c \
+        # ./lib/host_led_state_reader.c \
+        ../../lib/timelogger.c \
+

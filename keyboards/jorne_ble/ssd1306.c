@@ -3,11 +3,6 @@
 #include "nrf/i2c.h"
 #include <string.h>
 #include "print.h"
-#ifndef LOCAL_GLCDFONT
-#include "common/glcdfont.c"
-#else
-#include <helixfont.h>
-#endif
 #ifdef ADAFRUIT_BLE_ENABLE
 #include "adafruit_ble.h"
 #endif
@@ -17,6 +12,7 @@
 #include "sendchar.h"
 #include "timer.h"
 
+extern const unsigned char font[] PROGMEM;
 
 // Set this to 1 to help diagnose early startup problems
 // when testing power-on with ble.  Turn it off otherwise,

@@ -5,13 +5,6 @@
   #include "ssd1306.h"
 #endif
 
-#include "lib/mode_icon_reader.c"
-#include "lib/layer_state_reader.c"
-#include "lib/host_led_state_reader.c"
-#include "lib/logo_reader.c"
-#include "lib/keylogger.c"
-#include "lib/timelogger.c"
-
 // define variables for reactive RGB
 bool TOG_STATUS = false;
 int RGB_current_mode;
@@ -27,9 +20,9 @@ const uint8_t is_master = IS_LEFT_HAND;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 3
-#define _RAISE 4
-#define _ADJUST 16
+#define _LOWER 1
+#define _RAISE 2
+#define _ADJUST 3
 
 enum custom_keycodes {
     AD_WO_L = SAFE_RANGE, /* Start advertising without whitelist  */
@@ -153,6 +146,14 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   }
 }
 
+// When add source files to SRC in rules.mk, you can use functions.
+const char *read_layer_state(void);
+const char *read_logo(void);
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+const char *read_keylog(void);
+const char *read_keylogs(void);
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   char str[16];
 
@@ -164,7 +165,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   if (record->event.pressed) {
     set_keylog(keycode, record);
-    set_timelog();
+    //set_timelog();
   }
 
 
