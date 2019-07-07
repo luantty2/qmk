@@ -1,7 +1,8 @@
 # Corne keyboard logo importer/exporter
-# (c) /u/iamjoric 2019=07-07
+# (c) /u/iamjoric 2019-07-07
 
 from PIL import Image
+import os
 
 x = 0
 y = 0
@@ -95,9 +96,20 @@ def read_data():
 
     img.save('out.png')
 
-    print("Writing glcdfont.new.c...")
+    i = 0
+    while True:
+        i += 1
+        backup_fname = "glcdfont.c.%d.bak" % i
+        if not os.path.exists(backup_fname):
+            break
 
-    of = open('glcdfont.new.c','w')
+    print("Backing up glcdfont.c to %s..." % backup_fname )
+
+    os.rename('glcdfont.c', backup_fname);
+
+    print("Writing glcdfont.c...")
+
+    of = open('glcdfont.c','w')
 
     for s in header:
         print(s, file=of)
