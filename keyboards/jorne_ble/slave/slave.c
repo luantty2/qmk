@@ -67,7 +67,7 @@ void matrix_init_user() {
 
   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
   #ifdef SSD1306OLED
-      iota_gfx_init(0);   // turns on the display
+      iota_gfx_init(!IS_LEFT_HAND);   // turns on the display
   #endif
 
   select_row(3);
