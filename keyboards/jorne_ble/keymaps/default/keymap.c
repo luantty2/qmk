@@ -368,6 +368,7 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     //matrix_write_ln(matrix, read_host_led_state());
     //matrix_write_ln(matrix, read_timelog());
   } else {
+    matrix_write_ln(matrix, read_layer_state()); // somehow removes the dead pixel
     matrix_write(matrix, read_logo());
   }
 }
