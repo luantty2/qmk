@@ -10,7 +10,7 @@ set file=jorne_ble_master_default.hex
 
 %~dp0/uf2conv.py %file% -c -f 0xADA52840
 
-copy /Y flash.uf2 %~dp0\precompiled\master
+copy /Y flash.uf2 %~dp0\precompiled\master.uf2
 
 echo dfu| plink.exe -serial com26
 
