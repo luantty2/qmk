@@ -12,17 +12,15 @@ void bootloader_jump(void) {
   NVIC_SystemReset();
 }
 
-//static bool ble_flag = false;
+static bool ble_flag = false;
 
 void check_ble_switch(bool init) {
-/*
 	uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
 	if (ble_flag != value || init) {
 		ble_flag = value;
 		set_usb_enabled(!ble_flag);
 		set_ble_enabled(ble_flag);
 	}
-*/
 }
 
 void nrfmicro_init() {
