@@ -213,7 +213,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case RGB_TOG:
 		if (record->event.pressed) {
-			nrfmicro_power_enable(!rgblight_config.enable);
+			if (!rgblight_config.enable)
+				nrfmicro_power_enable(!rgblight_config.enable);
 		}
     break;
 

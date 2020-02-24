@@ -20,9 +20,11 @@ void nrfmicro_power_enable(bool enable) {
 		nrf_gpio_pin_set(POWER_PIN);
 	} else {
 		nrf_gpio_cfg_output(POWER_PIN);
-		nrf_gpio_pin_clear(POWER_PIN);
-		// set to input with pulldown as in Hasu scheme
-		nrf_gpio_cfg_input(POWER_PIN, NRF_GPIO_PIN_PULLDOWN);
+		nrf_gpio_pin_clear(POWER_PIN); // works
+		//input with pull-up consumes less than without it when pin is open (Hasu)
+		//nrf_gpio_cfg_input(POWER_PIN, NRF_GPIO_PIN_PULLUP); // doesn't seem to work
+		//nrf_gpio_cfg_input(POWER_PIN, NRF_GPIO_PIN_NOPULL); // neither this
+		//nrf_gpio_cfg_input(POWER_PIN, NRF_GPIO_PIN_PULLDOWN); // or this
 	}
 }
 
