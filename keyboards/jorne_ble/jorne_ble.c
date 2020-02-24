@@ -14,39 +14,47 @@ void bootloader_jump(void) {
 
 static bool ble_flag = false;
 
+void nrfmicro_power_enable(bool enable) {
+	if (enable)
+		nrf_gpio_pin_set(POWER_PIN);
+	else
+		nrf_gpio_pin_clear(POWER_PIN);
+}
+
 void check_ble_switch(bool init) {
 	uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
-	if (ble_flag != value || init) {
+
+	if (init || ble_flag != value) {
 		ble_flag = value;
+
+		// mind that it doesn't disable BLE completely, it only disables send
 		set_usb_enabled(!ble_flag);
 		set_ble_enabled(ble_flag);
+
+		nrf_gpio_pin_clear(LED_PIN);
+
+		if (ble_flag) {
+			// blink twice on ble enabled
+			for (int i=0; i<2; i++) {
+				nrf_gpio_pin_set(LED_PIN);
+				nrf_delay_ms(100);
+				nrf_gpio_pin_clear(LED_PIN);
+				nrf_delay_ms(100);
+			}
+		}
 	}
 }
 
 void nrfmicro_init() {
-
-  set_usb_enabled(true);
-
-  // power control for LEDs and OLED
+  // configure pins
   nrf_gpio_cfg_output(POWER_PIN);
-  nrf_gpio_pin_set(POWER_PIN);
-
-  // blink on power on
   nrf_gpio_cfg_output(LED_PIN);
   nrf_gpio_cfg_input(SWITCH_PIN, NRF_GPIO_PIN_PULLDOWN);
 
+  nrf_delay_ms(100);
+
+  nrfmicro_power_enable(false);
   check_ble_switch(true);
-
-  for (int i = 0; i < 2; i++) {
-    nrf_gpio_pin_set(LED_PIN);
-    nrf_delay_ms(100);
-
-    nrf_gpio_pin_clear(LED_PIN);
-    nrf_delay_ms(100);
-  }
-
-  nrf_gpio_pin_clear(LED_PIN);
-
 }
 
 void nrfmicro_update() {

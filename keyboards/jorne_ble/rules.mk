@@ -11,6 +11,8 @@ COMMAND_ENABLE = yes    # Commands for debug and configuration
 NKRO_ENABLE = no	    # USB Nkey Rollover
 CUSTOM_MATRIX = yes 	# This flag should be on for nrf52
 
+NO_USB_STARTUP_CHECK = yes
+
 ## chip/board settings
 MCU_FAMILY = NRF52
 # linker script to use

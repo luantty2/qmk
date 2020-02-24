@@ -15,6 +15,9 @@ extern rgblight_config_t rgblight_config;
 
 const uint8_t is_master = IS_LEFT_HAND;
 
+bool rgb_enabled = false;
+void nrfmicro_power_enable(bool enable);
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -207,8 +210,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //set_timelog();
   }
 
-
   switch (keycode) {
+    case RGB_TOG:
+		if (record->event.pressed) {
+			nrfmicro_power_enable(!rgblight_config.enable);
+		}
+    break;
+
     case QWERTY:
       if (record->event.pressed) {
         persistent_default_layer_set(1UL<<_QWERTY);
@@ -308,6 +316,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGBRST:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
+          nrfmicro_power_enable(true);
           eeconfig_update_rgblight_default();
           rgblight_enable();
           RGB_current_mode = rgblight_config.mode;
@@ -383,6 +392,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     }
   }
+
   return true;
 }
 ;
