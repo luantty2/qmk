@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ENABLE_STARTUP_ADV_NOLIST
 
 #define BLE_NUS_MIN_INTERVAL 30
-#define BLE_NUS_MAX_INTERVAL 40
-#define BLE_HID_MAX_INTERVAL 60
-#define BLE_HID_SLAVE_LATENCY 5
+#define BLE_NUS_MAX_INTERVAL 30
+#define BLE_HID_MAX_INTERVAL 50
+#define BLE_HID_SLAVE_LATENCY 3
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
@@ -46,7 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    1
 
-#define TAPPING_TERM 100
+#define TAPPING_TERM 200
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
@@ -60,11 +60,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define PROGMEM // arm-gcc does not interpret PROGMEM
 #define RGB_DI_PIN PIN1 //D3     // The pin the LED strip is connected to
-#ifdef RGBLED_BACK
-  #define RGBLED_NUM (22+6)
-#else
-  #define RGBLED_NUM 6
-#endif
+
+#define RGBLED_NUM 28
 
 /*
  * Feature disable options
