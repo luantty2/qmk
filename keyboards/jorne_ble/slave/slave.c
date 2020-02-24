@@ -36,39 +36,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 extern rgblight_config_t rgblight_config;
 #endif
 
+void nrfmicro_init();
+void nrfmicro_update();
 
 void unselect_rows(void);
 void select_row(uint8_t row);
 matrix_row_t read_cols(void);
 static bool bootloader_flag = false;
 
-static bool ble_flag = false;
-void check_ble_switch(bool init) {
-	uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
-	if (ble_flag != value || init) {
-		ble_flag = value;
-		set_usb_enabled(!ble_flag);
-		set_ble_enabled(ble_flag);
-	}
-}
-
 void matrix_init_user() {
-
-  // blink on power on
-  nrf_gpio_cfg_output(LED_PIN);
-  nrf_gpio_cfg_input(SWITCH_PIN, NRF_GPIO_PIN_PULLDOWN);
-
-  check_ble_switch(true);
-
-  for (int i = 0; i < 3; i++) {
-    nrf_gpio_pin_set(LED_PIN);
-    nrf_delay_ms(100);
-
-    nrf_gpio_pin_clear(LED_PIN);
-    nrf_delay_ms(100);
-  }
-
-  nrf_gpio_pin_clear(LED_PIN);
+  nrfmicro_init();
 
 #ifdef RGBLIGHT_ENABLE
   // turn on RGB leds by default, debug option *remove me*
@@ -102,6 +79,6 @@ void matrix_scan_user() {
   iota_gfx_task();  // this is what updates the display continuously
 #endif
 
-	check_ble_switch(false);
+  nrfmicro_update();
 }
 

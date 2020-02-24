@@ -54,9 +54,10 @@ extern "C" {
 
 #define LED_PIN GPIO(1,10)
 #define RESET_PIN GPIO(1,18)
-#define SWO_PIN GPIO(1,00)
-#define DFU_PIN GPIO(1,02)
+#define SWO_PIN GPIO(1,0)
+#define DFU_PIN GPIO(1,2)
 #define SWITCH_PIN GPIO(0,26)
+#define POWER_PIN GPIO(1,9)
 
 // i2c pins
 #define CONFIG_PIN_SDA PIN5

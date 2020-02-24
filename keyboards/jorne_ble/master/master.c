@@ -34,41 +34,18 @@ extern rgblight_config_t rgblight_config;
 
 #include "nrf/i2c.h"
 
+void nrfmicro_init();
+void nrfmicro_update();
+
 void unselect_rows(void);
 void select_row(uint8_t row);
 matrix_row_t read_cols(void);
 static bool bootloader_flag = false;
 
-static bool ble_flag = false;
-
-void check_ble_switch(bool init) {
-	uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
-	if (ble_flag != value || init) {
-		ble_flag = value;
-		set_usb_enabled(!ble_flag);
-		set_ble_enabled(ble_flag);
-	}
-}
-
 void matrix_init_user() {
 //  rgblight_mode_noeeprom(35);
 
-  // blink on power on
-  nrf_gpio_cfg_output(LED_PIN);
-  nrf_gpio_cfg_input(SWITCH_PIN, NRF_GPIO_PIN_PULLDOWN);
-
-  check_ble_switch(true);
-
-  for (int i = 0; i < 3; i++) {
-    nrf_gpio_pin_set(LED_PIN);
-    nrf_delay_ms(100);
-
-    nrf_gpio_pin_clear(LED_PIN);
-    nrf_delay_ms(100);
-  }
-
-  nrf_gpio_pin_clear(LED_PIN);
-
+  nrfmicro_init();
 
   select_row(3);
   wait_us(50);
@@ -99,5 +76,5 @@ void matrix_scan_user(void) {
     iota_gfx_task();  // this is what updates the display continuously
   #endif
 
-  check_ble_switch(false);
+  nrfmicro_update();
 }
