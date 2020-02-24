@@ -61,7 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PROGMEM // arm-gcc does not interpret PROGMEM
 #define RGB_DI_PIN PIN1 //D3     // The pin the LED strip is connected to
 
-#define RGBLED_NUM 28
+#define RGBLED_NUM (28+3) // undershoots 3 leds, bad timings probably
 #define RGBLIGHT_SPLIT
 
 /*

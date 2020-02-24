@@ -15,10 +15,15 @@ void bootloader_jump(void) {
 static bool ble_flag = false;
 
 void nrfmicro_power_enable(bool enable) {
-	if (enable)
+	if (enable) {
+		nrf_gpio_cfg_output(POWER_PIN);
 		nrf_gpio_pin_set(POWER_PIN);
-	else
+	} else {
+		nrf_gpio_cfg_output(POWER_PIN);
 		nrf_gpio_pin_clear(POWER_PIN);
+		// set to input with pulldown as in Hasu scheme
+		nrf_gpio_cfg_input(POWER_PIN, NRF_GPIO_PIN_PULLDOWN);
+	}
 }
 
 void check_ble_switch(bool init) {
