@@ -60,8 +60,8 @@ void matrix_init_user() {
 #ifdef RGBLIGHT_ENABLE
   // turn on RGB leds by default, debug option *remove me*
   // mode change doesnt work until you press bl reset (adjust+lrst)
-  eeconfig_update_rgblight_default();
-  rgblight_enable();
+  //eeconfig_update_rgblight_default();
+  //rgblight_enable();
 #endif
 
 

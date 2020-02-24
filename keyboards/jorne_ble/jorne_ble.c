@@ -12,21 +12,26 @@ void bootloader_jump(void) {
   NVIC_SystemReset();
 }
 
-static bool ble_flag = false;
+//static bool ble_flag = false;
 
 void check_ble_switch(bool init) {
+/*
 	uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
 	if (ble_flag != value || init) {
 		ble_flag = value;
 		set_usb_enabled(!ble_flag);
 		set_ble_enabled(ble_flag);
 	}
+*/
 }
 
 void nrfmicro_init() {
-  // disable LEDs and OLED
+
+  set_usb_enabled(true);
+
+  // power control for LEDs and OLED
   nrf_gpio_cfg_output(POWER_PIN);
-  nrf_gpio_pin_clear(POWER_PIN);
+  nrf_gpio_pin_set(POWER_PIN);
 
   // blink on power on
   nrf_gpio_cfg_output(LED_PIN);
