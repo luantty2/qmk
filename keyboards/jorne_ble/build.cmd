@@ -20,7 +20,7 @@ cd ..\..\.build
 
 copy /Y flash.uf2 %~dp0\precompiled\%role%.uf2
 
-echo dfu| plink.exe -serial com26
+echo dfu| plink.exe -serial com9
 
 echo Waiting for the UF2 drive. Press Reset twice...
 

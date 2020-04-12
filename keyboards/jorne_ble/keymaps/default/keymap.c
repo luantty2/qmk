@@ -213,8 +213,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case RGB_TOG:
 		if (record->event.pressed) {
-			if (!rgblight_config.enable)
+			// only enable the power for now, never disable
+			if (!rgblight_config.enable) {
 				nrfmicro_power_enable(!rgblight_config.enable);
+			}
+			// press RGB_TOG a few times to enable the OLED screen
+			#ifdef SSD1306OLED
+				iota_gfx_init(!IS_LEFT_HAND);
+			#endif
 		}
     break;
 
