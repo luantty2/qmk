@@ -43,6 +43,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  #include "pin_assign.h"
 #endif
 
+#ifdef RGBLIGHT_ENABLE
+#include "rgblight.h"
+rgblight_syncinfo_t rgblight_sync;
+#endif
+
 #include <stdbool.h>
 const uint32_t row_pins[THIS_DEVICE_ROWS] = MATRIX_ROW_PINS;
 const uint32_t col_pins[THIS_DEVICE_COLS] = MATRIX_COL_PINS;
@@ -355,6 +360,17 @@ uint8_t matrix_scan_impl(matrix_row_t* _matrix){
     ble_nus_send_bytes((uint8_t*) ble_switch_send, (matrix_changed+1)*sizeof(ble_switch_state_t));
     send_flag = true;
   }
+
+
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_ANIMATIONS)
+  if (rgblight_get_change_flags()) {
+    rgblight_get_syncinfo(&rgblight_sync);
+    ble_nus_send_bytes((uint8_t*)&rgblight_sync, sizeof(rgblight_sync));
+    rgblight_clear_change_flags();
+  }
+#endif
+
+
 #else
   UNUSED_VARIABLE(ble_switch_send);
 #endif
@@ -570,7 +586,15 @@ void ble_nus_on_disconnect() {
 #endif
 }
 
+extern void rgblight_update_sync(rgblight_syncinfo_t *syncinfo, bool write_to_eeprom);
+
 void ble_nus_packetrcv_handler(ble_switch_state_t* buf, uint8_t len) {
+
+  if (len == sizeof(rgblight_syncinfo_t)) {
+    rgblight_update_sync((rgblight_syncinfo_t*)buf, false);
+    return;
+  }
+
   static uint8_t prev_recv_timing;
   int i=0;
   int32_t slave_time_est;

@@ -14,16 +14,16 @@ void bootloader_jump(void) {
   NVIC_SystemReset();
 }
 
+bool has_usb(void) {
+  return (nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_CONNECTED
+    || nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_READY);
+}
+
 static bool ble_flag = false;
-
-
-extern 
 
 void nrfmicro_power_enable(bool enable) {
 
-  // do not switch power off if usb present
-  if (nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_CONNECTED
-    || nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_READY)
+  if (has_usb())
       enable = true;
 
   if (enable) {
@@ -63,65 +63,18 @@ void check_ble_switch(bool init) {
   }
 }
 
-#define RGBLIGHT_MODE_BREATHING 15
-
-#ifdef RGBLIGHT_ENABLE
-extern int RGB_current_mode;
-extern rgblight_config_t rgblight_config;
-#endif
-void rgb_test() {
-#ifdef RGBLIGHT_ENABLE
-
-  //nrfmicro_power_enable(true);
-  //eeconfig_update_rgblight_default();
-
-  //rgblight_mode_noeeprom(15); //hangs!
-
-  //rgblight_enable();
-
-  //rgblight_enable_noeeprom(); // enables Rgb, without saving settings
-  //rgblight_sethsv_noeeprom(180, 255, 255); // sets the color to teal/cyan without saving
-  //rgblight_mode_noeeprom(3); // sets mode to Fast breathing without savin
-
-/*
-  eeconfig_update_rgblight_default();
-
-  //rgblight_mode(15); //turns rgb off
-  //rgblight_mode_noeeprom(15); // turns rgb off
-
-  for (int i=0; i<2; i++) {
-    rgblight_enable();
-    nrf_delay_ms(250);
-    rgblight_disable();
-    nrf_delay_ms(250);
-  }
-
-  rgblight_enable();
-*/
-#endif
-}
-
 void nrfmicro_init() {
+
   // configure pins
   nrf_gpio_cfg_output(POWER_PIN);
   nrf_gpio_cfg_output(LED_PIN);
   nrf_gpio_cfg_input(SWITCH_PIN, NRF_GPIO_PIN_PULLDOWN);
 
   nrfmicro_power_enable(true);
-
-  nrf_delay_ms(100);
-  //nrfmicro_power_enable(false);
-
   check_ble_switch(true);
 
-  nrf_delay_ms(100);
-
   eeconfig_update_rgblight_default();
-  //rgblight_mode_noeeprom(15); //hangs!
-  nrf_delay_ms(250);
-  rgblight_toggle();
-
-  //rgb_test();
+  rgblight_enable();
 }
 
 void nrfmicro_update() {

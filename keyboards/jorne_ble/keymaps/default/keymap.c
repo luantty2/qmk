@@ -17,6 +17,8 @@ const uint8_t is_master = IS_LEFT_HAND;
 
 void nrfmicro_power_enable(bool enable);
 
+bool has_usb(void);
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -418,11 +420,23 @@ void matrix_update(struct CharacterMatrix *dest,
   }
 }
 
+//const char *read_host_led_state(void);
+//const char *read_mode_icon(bool swap);
+
 void matrix_render_user(struct CharacterMatrix *matrix) {
+
   if (is_master) {
     matrix_write_ln(matrix, read_layer_state());
     matrix_write_ln(matrix, read_keylog());
-    matrix_write_ln(matrix, read_keylogs());
+
+    int vcc = get_vcc();
+    if (vcc && vcc<4400) {
+      char str[16];
+      sprintf(str, "Bat: %4dmV%s", vcc, has_usb() ? " (+USB)" : "");
+      matrix_write_ln(matrix, str);
+    }
+
+    //matrix_write_ln(matrix, read_keylogs());
     //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     //matrix_write_ln(matrix, read_host_led_state());
     //matrix_write_ln(matrix, read_timelog());

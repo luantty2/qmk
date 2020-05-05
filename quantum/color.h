@@ -21,29 +21,28 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
 #if defined(__GNUC__)
-#define PACKED __attribute__ ((__packed__))
+#define PACKED1 __attribute__ ((__packed__))
 #else
-#define PACKED
+#define PACKED1
 #endif
 
 #if defined(_MSC_VER)
 #pragma pack( push, 1 )
 #endif
 
-typedef struct PACKED
+typedef struct PACKED1
 {
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
 } RGB;
 
-typedef struct PACKED
+typedef struct PACKED1
 {
-	uint8_t h;
-	uint8_t s;
-	uint8_t v;
+  uint8_t h;
+  uint8_t s;
+  uint8_t v;
 } HSV;
 
 #if defined(_MSC_VER)
