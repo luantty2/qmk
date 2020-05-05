@@ -38,10 +38,7 @@ void pwm_handler(nrfx_pwm_evt_type_t event_type) {
 }
 
 void ws2812_setleds(LED_TYPE *ledarray, uint16_t number_of_leds) {
-  if (nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_CONNECTED ||
-      nrfx_power_usbstatus_get() == NRFX_POWER_USB_STATE_READY) {
-    ws2812_setleds_pin(ledarray, number_of_leds, RGB_DI_PIN);
-  }
+  ws2812_setleds_pin(ledarray, number_of_leds, RGB_DI_PIN);
 }
 
 void ws2812_setleds_pin (LED_TYPE *ledarray, uint16_t number_of_leds,uint8_t pinmask){

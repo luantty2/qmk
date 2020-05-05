@@ -47,13 +47,6 @@ static bool bootloader_flag = false;
 void matrix_init_user() {
   nrfmicro_init();
 
-#ifdef RGBLIGHT_ENABLE
-  // turn on RGB leds by default, debug option *remove me*
-  // mode change doesnt work until you press bl reset (adjust+lrst)
-  eeconfig_update_rgblight_default();
-  rgblight_enable();
-#endif
-
   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
   #ifdef SSD1306OLED
       iota_gfx_init(!IS_LEFT_HAND);   // turns on the display

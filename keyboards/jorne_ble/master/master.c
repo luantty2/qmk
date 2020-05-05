@@ -43,8 +43,6 @@ matrix_row_t read_cols(void);
 static bool bootloader_flag = false;
 
 void matrix_init_user() {
-//  rgblight_mode_noeeprom(35);
-
   nrfmicro_init();
 
   select_row(3);
@@ -56,14 +54,6 @@ void matrix_init_user() {
   } else if (row == 0b10) {
     bootloader_flag = true;
   }
-
-#ifdef RGBLIGHT_ENABLE
-  // turn on RGB leds by default, debug option *remove me*
-  // mode change doesnt work until you press bl reset (adjust+lrst)
-  //eeconfig_update_rgblight_default();
-  //rgblight_enable();
-#endif
-
 
   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
   #ifdef SSD1306OLED

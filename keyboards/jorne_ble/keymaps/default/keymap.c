@@ -15,7 +15,6 @@ extern rgblight_config_t rgblight_config;
 
 const uint8_t is_master = IS_LEFT_HAND;
 
-bool rgb_enabled = false;
 void nrfmicro_power_enable(bool enable);
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -212,16 +211,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     case RGB_TOG:
-		if (record->event.pressed) {
-			// only enable the power for now, never disable
-			if (!rgblight_config.enable) {
-				nrfmicro_power_enable(!rgblight_config.enable);
-			}
-			// press RGB_TOG a few times to enable the OLED screen
-			#ifdef SSD1306OLED
-				iota_gfx_init(!IS_LEFT_HAND);
-			#endif
-		}
+        if (record->event.pressed) {
+            // only enable the power for now, never disable
+            if (!rgblight_config.enable) {
+                //nrfmicro_power_enable(!rgblight_config.enable);
+            }
+            #ifdef SSD1306OLED
+                //iota_gfx_init(!IS_LEFT_HAND); // enable the OLED screen
+            #endif
+        }
     break;
 
     case QWERTY:
@@ -330,6 +328,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           NRF_LOG_INFO("RGBRST, RGB_current_mode: %d\n", RGB_current_mode);
         }
       #endif
+
+      #ifdef SSD1306OLED
+      //iota_gfx_init(!IS_LEFT_HAND); // enable the OLED screen
+      #endif
+
       break;
   }
   if (record->event.pressed) {
