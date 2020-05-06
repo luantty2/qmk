@@ -73,8 +73,8 @@ void nrfmicro_init() {
   nrfmicro_power_enable(true);
   check_ble_switch(true);
 
-  eeconfig_update_rgblight_default();
-  rgblight_enable();
+  //eeconfig_update_rgblight_default();
+  //rgblight_enable();
 }
 
 void nrfmicro_update() {

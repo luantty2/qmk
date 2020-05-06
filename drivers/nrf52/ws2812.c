@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 nrfx_pwm_t pwm0 = NRFX_PWM_INSTANCE(0);
 
-#define DUMMY_SIGNAL_LEN 10
+#define DUMMY_SIGNAL_LEN 16
 
 void pwm_handler(nrfx_pwm_evt_type_t event_type) {
 
