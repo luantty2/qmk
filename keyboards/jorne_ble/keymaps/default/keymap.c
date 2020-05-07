@@ -5,6 +5,8 @@
   #include "ssd1306.h"
 #endif
 
+#include "eeprom.h"
+
 // define variables for reactive RGB
 bool TOG_STATUS = false;
 int RGB_current_mode;
@@ -16,6 +18,7 @@ extern rgblight_config_t rgblight_config;
 const uint8_t is_master = IS_LEFT_HAND;
 
 void nrfmicro_power_enable(bool enable);
+extern uint8_t nrfmicro_switch_pin(void);
 
 bool has_usb(void);
 
@@ -209,6 +212,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
     //set_timelog();
+
+
+    eeprom_write_dword(EECONFIG_RGBLIGHT, 666);
   }
 
   switch (keycode) {
@@ -445,7 +451,8 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
       char vc[16], str[32];
       int vcc = get_vcc();
       sprintf(vc, "%4dmV", vcc);
-      sprintf(str, "Bat: %s USB: %s", vcc==0 || vcc>4400 ? "off   " : vc, has_usb()? "on":"off");
+      sprintf(str, "Bat: %s USB: %s", vcc==0 || vcc>4400 || nrfmicro_switch_pin()==0 ? "off   " : vc, has_usb()? "on":"off");
+      //sprintf(str, "Switch pin: %d", nrfmicro_switch_pin());
       matrix_write_ln(matrix, str);
     }
 
@@ -462,8 +469,7 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
 }
 
 void iota_gfx_task_user(void) {
-  ScreenOffInterval = has_usb() ? 600000 : 60000; // ms
-
+  ScreenOffInterval = has_usb() ? 60*10*1000 : 60*5*1000; // ms
   struct CharacterMatrix matrix;
   matrix_clear(&matrix);
   matrix_render_user(&matrix);

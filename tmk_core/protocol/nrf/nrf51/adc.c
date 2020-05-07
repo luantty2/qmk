@@ -39,7 +39,7 @@ static void adc_event_handler(nrf_drv_adc_evt_t const * p_event)
     }
 }
 
-void adc_init() {
+void adc_init(void) {
   ret_code_t ret_code;
   const nrf_drv_adc_config_t config = NRF_DRV_ADC_DEFAULT_CONFIG;
 
@@ -54,7 +54,7 @@ void adc_init() {
 //  APP_ERROR_CHECK(nrf_drv_adc_buffer_convert(adc_buffer, 1));
 }
 
-void adc_start() {
+void adc_start(void) {
 //  nrf_adc_enable();
   nrf_drv_adc_channel_t m_channel_config = {{{
       .resolution = NRF_ADC_CONFIG_RES_8BIT,
@@ -67,6 +67,6 @@ void adc_start() {
   nrf_drv_adc_sample();
 }
 
-uint16_t get_vcc() {
+uint16_t get_vcc(void) {
   return ((uint32_t)adc_buffer[0]*3*1200/255);
 }

@@ -400,7 +400,7 @@ static void battery_level_update(void) {
   //battery_level = get_vcc() / 30;
 
   // NB! joric. get_vcc is in mV, so we need to map 2.9V..4.2V into 0..100
-  int high = 4200, low = 2400;
+  int high = 4200, low = 2900;
   int vcc = get_vcc();
   battery_level = (vcc - low) * 100 / (high - low);
   if (battery_level > 100) battery_level = 100;

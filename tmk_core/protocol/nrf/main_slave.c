@@ -44,7 +44,7 @@ static void slave_main_tasks(void* context) {
   rgblight_task();
 #endif
 
-  if ((++adc_counter)%250==1)
+  if ((adc_counter++)%250==0)
     adc_start();
 }
 

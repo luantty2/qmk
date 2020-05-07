@@ -39,8 +39,15 @@ void nrfmicro_power_enable(bool enable) {
   }
 }
 
-void check_ble_switch(bool init) {
+uint8_t nrfmicro_switch_pin(void) {
   uint8_t value = nrf_gpio_pin_read(SWITCH_PIN);
+  return value;
+}
+
+
+void check_ble_switch(bool init) {
+
+  uint8_t value = nrfmicro_switch_pin();
 
   if (init || ble_flag != value) {
     ble_flag = value;
@@ -72,12 +79,13 @@ void nrfmicro_init(void) {
 
   nrfmicro_power_enable(true);
   check_ble_switch(true);
-
-  eeconfig_update_rgblight_default();
-  rgblight_enable();
 }
 
+void eeprom_update(void);
+
+// called everny matrix_scan_user
 void nrfmicro_update(void) {
   check_ble_switch(false);
+  eeprom_update();  // important
 }
 
