@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "adc.h"
+
 void ble_stack_init(void);
 void peer_manager_init();
 void scheduler_init();

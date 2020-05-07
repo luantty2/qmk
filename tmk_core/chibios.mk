@@ -39,9 +39,12 @@ include $(STARTUP_MK)
 # HAL-OSAL files (optional).
 include $(CHIBIOS)/os/hal/hal.mk
 
-PLATFORM_MK = $(CHIBIOS)/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)/platform.mk
+$(info FUCK YOU)
+$(info $$MCU_FAMILY is [${MCU_FAMILY}])
+
+PLATFORM_MK = $(CHIBIOS)/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)666/platform.mk
 ifeq ("$(wildcard $(PLATFORM_MK))","")
-PLATFORM_MK = $(CHIBIOS_CONTRIB)/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)/platform.mk
+PLATFORM_MK = $(CHIBIOS_CONTRIB)/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)777/platform.mk
 endif
 include $(PLATFORM_MK)
 

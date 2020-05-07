@@ -63,7 +63,7 @@ void check_ble_switch(bool init) {
   }
 }
 
-void nrfmicro_init() {
+void nrfmicro_init(void) {
 
   // configure pins
   nrf_gpio_cfg_output(POWER_PIN);
@@ -73,11 +73,11 @@ void nrfmicro_init() {
   nrfmicro_power_enable(true);
   check_ble_switch(true);
 
-  //eeconfig_update_rgblight_default();
-  //rgblight_enable();
+  eeconfig_update_rgblight_default();
+  rgblight_enable();
 }
 
-void nrfmicro_update() {
+void nrfmicro_update(void) {
   check_ble_switch(false);
 }
 

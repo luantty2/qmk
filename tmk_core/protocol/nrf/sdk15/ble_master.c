@@ -232,7 +232,7 @@ void advertising_start() {
 //  }
 }
 
-void ble_disconnect() {
+void ble_disconnect(void) {
   sd_ble_gap_adv_stop(m_advertising.adv_handle);
   if (m_conn_handle != BLE_CONN_HANDLE_INVALID) {
     ret_code_t err_code = sd_ble_gap_disconnect(m_conn_handle,
@@ -241,6 +241,10 @@ void ble_disconnect() {
       APP_ERROR_CHECK(err_code);
     }
   }
+}
+
+bool ble_connected(void) {
+  return m_conn_handle != BLE_CONN_HANDLE_INVALID;
 }
 
 

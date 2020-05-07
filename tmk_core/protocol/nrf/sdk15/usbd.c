@@ -49,6 +49,7 @@
 
 #ifdef RGBLIGHT_ENABLE
 #include "rgblight.h"
+#undef PACKED
 #endif
 
 #ifdef EXTRAKEY_ENABLE

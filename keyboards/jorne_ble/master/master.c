@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "matrix.h"
 #include "rgblight.h"
+#undef PACKED
 #include "nrf.h"
 #include "app_ble_func.h"
 #include "wait.h"
@@ -34,8 +35,8 @@ extern rgblight_config_t rgblight_config;
 
 #include "nrf/i2c.h"
 
-void nrfmicro_init();
-void nrfmicro_update();
+void nrfmicro_init(void);
+void nrfmicro_update(void);
 
 void unselect_rows(void);
 void select_row(uint8_t row);

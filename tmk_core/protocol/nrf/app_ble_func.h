@@ -28,20 +28,21 @@ typedef struct {
 } lp_mat_config_t;
 
 __WEAK void ble_nus_packetrcv_handler(ble_switch_state_t* buf, uint8_t len);
-__WEAK void ble_nus_on_disconnect();
+__WEAK void ble_nus_on_disconnect(void);
 
 uint32_t ble_nus_send_bytes(uint8_t* buf, uint16_t len);
 
-void ble_disconnect();
+void ble_disconnect(void);
 void restart_advertising_wo_whitelist(void);
 void restart_advertising_id(uint8_t id);
 void delete_bonds(void);
 void delete_bond_id(uint8_t id);
 
-void start_dfu();
-void sleep_mode_enter();
+void start_dfu(void);
+void sleep_mode_enter(void);
 
-uint16_t get_vcc();
+uint16_t get_vcc(void);
+bool ble_connected(void);
 
 #ifdef NRF_SEPARATE_KEYBOARD_SLAVE
 #define get_ble_enabled()
@@ -49,9 +50,9 @@ uint16_t get_vcc();
 #define get_usb_enabled()
 #define set_usb_enabled(x)
 #else
-bool get_ble_enabled();
+bool get_ble_enabled(void);
 void set_ble_enabled(bool enabled);
-bool get_usb_enabled();
+bool get_usb_enabled(void);
 void set_usb_enabled(bool enabled);
 #endif
 

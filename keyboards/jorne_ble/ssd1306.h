@@ -91,4 +91,6 @@ void matrix_render(struct CharacterMatrix *matrix);
 
 bool process_record_gfx(uint16_t keycode, keyrecord_t *record);
 
+extern int ScreenOffInterval;
+
 #endif

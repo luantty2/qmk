@@ -423,16 +423,29 @@ void matrix_update(struct CharacterMatrix *dest,
 //const char *read_host_led_state(void);
 //const char *read_mode_icon(bool swap);
 
+const char *read_rgb_info(void);
+
 void matrix_render_user(struct CharacterMatrix *matrix) {
 
-  if (is_master) {
-    matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
 
-    int vcc = get_vcc();
-    if (vcc && vcc<4400) {
-      char str[16];
-      sprintf(str, "Bat: %4dmV%s", vcc, has_usb() ? " (+USB)" : "");
+//  if (is_master) 
+{
+    //matrix_write_ln(matrix, read_layer_state());
+    //matrix_write_ln(matrix, read_keylog());
+
+    {
+    char str[32];
+    sprintf(str, "%s %s", is_master ? "Master" : "Slave", ble_connected() ? "Connected": "Not connected");
+    matrix_write_ln(matrix, str);
+    }
+
+    matrix_write_ln(matrix, read_rgb_info());
+
+    {
+      char vc[16], str[32];
+      int vcc = get_vcc();
+      sprintf(vc, "%4dmV", vcc);
+      sprintf(str, "Bat: %s USB: %s", vcc==0 || vcc>4400 ? "off   " : vc, has_usb()? "on":"off");
       matrix_write_ln(matrix, str);
     }
 
@@ -440,13 +453,17 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     //matrix_write_ln(matrix, read_host_led_state());
     //matrix_write_ln(matrix, read_timelog());
-  } else {
-    matrix_write_ln(matrix, read_layer_state()); // somehow removes the dead pixel
-    matrix_write(matrix, read_logo());
   }
+// else {
+//    matrix_write_ln(matrix, read_layer_state()); // somehow removes the dead pixel
+//    matrix_write(matrix, read_logo());
+//  }
+
 }
 
 void iota_gfx_task_user(void) {
+  ScreenOffInterval = has_usb() ? 600000 : 60000; // ms
+
   struct CharacterMatrix matrix;
   matrix_clear(&matrix);
   matrix_render_user(&matrix);

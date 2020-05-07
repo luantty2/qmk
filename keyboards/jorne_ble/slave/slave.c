@@ -36,15 +36,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 extern rgblight_config_t rgblight_config;
 #endif
 
-void nrfmicro_init();
-void nrfmicro_update();
+void nrfmicro_init(void);
+void nrfmicro_update(void);
 
 void unselect_rows(void);
 void select_row(uint8_t row);
 matrix_row_t read_cols(void);
 static bool bootloader_flag = false;
 
-void matrix_init_user() {
+void matrix_init_user(void) {
   nrfmicro_init();
 
   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
@@ -63,7 +63,7 @@ void matrix_init_user() {
   }
 }
 
-void matrix_scan_user() {
+void matrix_scan_user(void) {
  static int cnt;
  if (bootloader_flag && cnt++==500) {
    bootloader_jump();

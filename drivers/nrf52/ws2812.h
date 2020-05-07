@@ -28,6 +28,7 @@
 
 #include <stdint.h>
 #include "rgblight_types.h"
+#undef PACKED
 
 
 /* User Interface
