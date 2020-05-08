@@ -115,9 +115,8 @@ extern void rgblight_update_sync(rgblight_syncinfo_t *syncinfo, bool write_to_ee
 
 
 uint32_t ble_nus_recv_bytes(uint8_t* buf, uint16_t len) {
-
   if (len == sizeof(rgblight_syncinfo_t)) {
-    rgblight_update_sync((rgblight_syncinfo_t*)buf, false);
+    rgblight_update_sync((rgblight_syncinfo_t*)buf, true);
   }
   return 0;
 }

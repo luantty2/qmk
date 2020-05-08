@@ -636,7 +636,10 @@ void rgblight_update_sync(rgblight_syncinfo_t *syncinfo, bool write_to_eeprom) {
             rgblight_config.enable = 1;  // == rgblight_enable_noeeprom();
             rgblight_mode_eeprom_helper(syncinfo->config.mode, write_to_eeprom);
         } else {
-            rgblight_disable_noeeprom();
+            //rgblight_disable_noeeprom();
+            // super weird. i want to write to eeprom on turning off as well // joric
+            rgblight_disable(); // joric
+            rgblight_mode_eeprom_helper(syncinfo->config.mode, write_to_eeprom); // joric
         }
     }
     if (syncinfo->status.change_flags & RGBLIGHT_STATUS_CHANGE_HSVS) {
