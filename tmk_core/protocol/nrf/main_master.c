@@ -93,6 +93,7 @@ rgblight_syncinfo_t rgblight_sync;
 
 uint32_t ble_nus_send_bytes_to_slave(uint8_t* buf, uint16_t len);
 
+void eeprom_update(void);
 void timer_tick(uint8_t interval);
 void main_tasks(void* p_context) {
   UNUSED_PARAMETER(p_context);
@@ -119,6 +120,7 @@ void main_tasks(void* p_context) {
   }
 
 #endif
+  eeprom_update();
 }
 
 void send_keyboard(report_keyboard_t *report) {

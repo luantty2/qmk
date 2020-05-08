@@ -36,6 +36,7 @@ void sendchar_pf(void *p, char c){
   UNUSED_VARIABLE(p);
   UNUSED_VARIABLE(c);
 };
+void eeprom_update(void);
 void timer_tick(uint8_t interval);
 static void slave_main_tasks(void* context) {
   timer_tick(MAINTASK_INTERVAL);
@@ -46,6 +47,8 @@ static void slave_main_tasks(void* context) {
 
   if ((adc_counter++)%250==0)
     adc_start();
+
+  eeprom_update();
 }
 
 /**@brief Application main function.

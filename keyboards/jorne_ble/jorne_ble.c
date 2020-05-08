@@ -81,11 +81,8 @@ void nrfmicro_init(void) {
   check_ble_switch(true);
 }
 
-void eeprom_update(void);
-
 // called every matrix_scan_user
 void nrfmicro_update(void) {
   check_ble_switch(false);
-  eeprom_update();  // important
 }
 
