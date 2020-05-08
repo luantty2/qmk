@@ -681,3 +681,4 @@ void db_discovery_init(void)
     ret_code_t err_code = ble_db_discovery_init(db_disc_handler);
     APP_ERROR_CHECK(err_code);
 }
+

@@ -394,6 +394,12 @@ void peer_manager_init() {
  */
 /**@snippet [Handling the data received over BLE] */
 static void nus_data_handler(ble_nus_evt_t * p_evt) {
+  // joric below this line
+  if (p_evt->type == BLE_NUS_EVT_RX_DATA)
+  {
+      ble_nus_recv_bytes((uint8_t*)p_evt->params.rx_data.p_data, (uint16_t)p_evt->params.rx_data.length);
+  }
+
 }
 /**@snippet [Handling the data received over BLE] */
 
@@ -786,6 +792,7 @@ uint32_t ble_nus_send_bytes(uint8_t* buf, uint16_t len) {
   uint32_t err_code = ble_nus_data_send(&m_nus, buf, &len, m_conn_handle);
   return err_code;
 }
+
 
 void timers_init(void (*main_task)(void*)) {
   ret_code_t err_code = app_timer_init();

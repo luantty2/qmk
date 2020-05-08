@@ -440,9 +440,19 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     //matrix_write_ln(matrix, read_keylog());
 
     {
-    char str[32];
-    sprintf(str, "%s %s", is_master ? "Master" : "Slave", ble_connected() ? "Connected": "Not connected");
-    matrix_write_ln(matrix, str);
+    char str[64];
+
+#if (IS_LEFT_HAND)
+      sprintf (str, "Master: %s%s%s",
+        get_usb_enabled() && !get_ble_enabled() ? "USB mode":"",
+        get_ble_enabled() && ble_connected() ? "connected":"",
+        get_ble_enabled() && !ble_connected() ? "disconnected":""
+      );
+#else
+      sprintf(str, "Slave: %s", ble_connected() ? "connected" : "disconnected");
+#endif
+
+      matrix_write_ln(matrix, str);
     }
 
     matrix_write_ln(matrix, read_rgb_info());

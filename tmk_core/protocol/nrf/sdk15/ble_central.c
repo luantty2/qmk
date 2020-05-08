@@ -484,3 +484,9 @@ void db_discovery_init(void) {
   ret_code_t err_code = ble_db_discovery_init(db_disc_handler);
   APP_ERROR_CHECK(err_code);
 }
+
+
+uint32_t ble_nus_send_bytes_to_slave(uint8_t* buf, uint16_t len) {
+    return ble_nus_c_string_send(&m_ble_nus_c, buf, len);
+}
+

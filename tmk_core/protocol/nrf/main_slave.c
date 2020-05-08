@@ -110,3 +110,15 @@ __WEAK void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
     app_error_save_and_stop(id, pc, info);
 #endif // DEBUG
 }
+
+extern void rgblight_update_sync(rgblight_syncinfo_t *syncinfo, bool write_to_eeprom);
+
+
+uint32_t ble_nus_recv_bytes(uint8_t* buf, uint16_t len) {
+
+  if (len == sizeof(rgblight_syncinfo_t)) {
+    rgblight_update_sync((rgblight_syncinfo_t*)buf, false);
+  }
+  return 0;
+}
+

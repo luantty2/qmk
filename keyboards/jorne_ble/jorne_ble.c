@@ -83,7 +83,7 @@ void nrfmicro_init(void) {
 
 void eeprom_update(void);
 
-// called everny matrix_scan_user
+// called every matrix_scan_user
 void nrfmicro_update(void) {
   check_ble_switch(false);
   eeprom_update();  // important

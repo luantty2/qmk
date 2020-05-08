@@ -86,6 +86,13 @@ void raw_hid_task(void);
 void console_task(void);
 #endif
 
+#ifdef RGBLIGHT_ENABLE
+#include "rgblight.h"
+rgblight_syncinfo_t rgblight_sync;
+#endif
+
+uint32_t ble_nus_send_bytes_to_slave(uint8_t* buf, uint16_t len);
+
 void timer_tick(uint8_t interval);
 void main_tasks(void* p_context) {
   UNUSED_PARAMETER(p_context);
@@ -104,6 +111,13 @@ void main_tasks(void* p_context) {
 #endif
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_ANIMATIONS)
   rgblight_task();
+
+  if (rgblight_get_change_flags()) {
+    rgblight_get_syncinfo(&rgblight_sync);
+    ble_nus_send_bytes_to_slave((uint8_t*)&rgblight_sync, sizeof(rgblight_sync));
+    rgblight_clear_change_flags();
+  }
+
 #endif
 }
 

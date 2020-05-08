@@ -61,6 +61,10 @@ void matrix_init_user(void) {
   } else if (row == 0b10) {
     bootloader_flag = true;
   }
+
+  eeconfig_update_rgblight_default();
+  rgblight_enable();
+  rgblight_mode(15);
 }
 
 void matrix_scan_user(void) {

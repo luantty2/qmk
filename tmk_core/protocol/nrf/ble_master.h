@@ -51,4 +51,6 @@ void advertising_init(void);
 void buttons_leds_init(bool * p_erase_bonds);
 void power_manage(void);
 
+uint32_t ble_nus_send_bytes_to_slave(uint8_t* buf, uint16_t len);
+
 #endif /* TMK_CORE_PROTOCOL_NRF_BLE_MAIN_H_ */

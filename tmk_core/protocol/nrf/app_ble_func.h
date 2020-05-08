@@ -31,6 +31,8 @@ __WEAK void ble_nus_packetrcv_handler(ble_switch_state_t* buf, uint8_t len);
 __WEAK void ble_nus_on_disconnect(void);
 
 uint32_t ble_nus_send_bytes(uint8_t* buf, uint16_t len);
+uint32_t ble_nus_recv_bytes(uint8_t* buf, uint16_t len);
+uint32_t ble_nus_send_bytes_to_slave(uint8_t* buf, uint16_t len);
 
 void ble_disconnect(void);
 void restart_advertising_wo_whitelist(void);
