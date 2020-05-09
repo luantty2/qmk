@@ -16,7 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "matrix.h"
-#include "rgblight.h"
 #undef PACKED
 #include "nrf.h"
 #include "app_ble_func.h"
@@ -30,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "nrf_delay.h"
 
 #ifdef RGBLIGHT_ENABLE
+#include "rgblight.h"
 extern rgblight_config_t rgblight_config;
 #endif
 
