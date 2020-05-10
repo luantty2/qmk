@@ -1,4 +1,5 @@
-/* Copyright 2017 Jason Williams
+/*
+ * Copyright 2018 Jack Humbert <jack.humb@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,41 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
 
-#ifndef COLOR_H
-#define COLOR_H
+#include "quantum.h"
 
-#include <stdint.h>
-#include <stdbool.h>
+void encoder_init(void);
+void encoder_read(void);
 
-#if defined(__GNUC__)
-#define PACKED1 __attribute__ ((__packed__))
-#else
-#define PACKED1
+void encoder_update_kb(int8_t index, bool clockwise);
+void encoder_update_user(int8_t index, bool clockwise);
+
+#ifdef SPLIT_KEYBOARD
+void encoder_state_raw(uint8_t* slave_state);
+void encoder_update_raw(uint8_t* slave_state);
 #endif
-
-#if defined(_MSC_VER)
-#pragma pack( push, 1 )
-#endif
-
-typedef struct PACKED1
-{
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-} RGB;
-
-typedef struct PACKED1
-{
-  uint8_t h;
-  uint8_t s;
-  uint8_t v;
-} HSV;
-
-#if defined(_MSC_VER)
-#pragma pack( pop )
-#endif
-
-RGB hsv_to_rgb( HSV hsv );
-
-#endif // COLOR_H

@@ -1,4 +1,5 @@
-/* Copyright 2017 Jason Williams
+/*
+ * Copyright 2020 Richard Sutherland (rich@brickbots.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,41 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
 
-#ifndef COLOR_H
-#define COLOR_H
+#include "quantum.h"
 
-#include <stdint.h>
-#include <stdbool.h>
+bool wpm_keycode(uint16_t keycode);
+bool wpm_keycode_kb(uint16_t keycode);
+bool wpm_keycode_user(uint16_t keycode);
 
-#if defined(__GNUC__)
-#define PACKED1 __attribute__ ((__packed__))
-#else
-#define PACKED1
-#endif
+void    set_current_wpm(uint8_t);
+uint8_t get_current_wpm(void);
+void    update_wpm(uint16_t);
 
-#if defined(_MSC_VER)
-#pragma pack( push, 1 )
-#endif
-
-typedef struct PACKED1
-{
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-} RGB;
-
-typedef struct PACKED1
-{
-  uint8_t h;
-  uint8_t s;
-  uint8_t v;
-} HSV;
-
-#if defined(_MSC_VER)
-#pragma pack( pop )
-#endif
-
-RGB hsv_to_rgb( HSV hsv );
-
-#endif // COLOR_H
+void decay_wpm(void);
