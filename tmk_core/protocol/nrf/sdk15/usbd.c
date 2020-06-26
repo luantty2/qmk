@@ -569,13 +569,23 @@ char cdc_acm_getc() {
 //}
 //
 static void kbd_status(void) {
-//    bool v;
-//    v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_NUM_LOCK);
-//    v ? bsp_board_led_on(LED_HID_REP_IN) : bsp_board_led_off(LED_HID_REP_IN);
-//
-//    v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_CAPS_LOCK);
-//    v ? bsp_board_led_on(LED_HID_REP_OUT) : bsp_board_led_off(LED_HID_REP_OUT);
+   // bool v;
+   // v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_NUM_LOCK);
+   // v ? bsp_board_led_on(LED_HID_REP_IN) : bsp_board_led_off(LED_HID_REP_IN);
+
+    // v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_CAPS_LOCK);
+    // return v;
+   // v ? bsp_board_led_on(LED_HID_REP_OUT) : bsp_board_led_off(LED_HID_REP_OUT);
 }
+
+// static bool caps_status(void) {
+//    bool v;
+//    // v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_NUM_LOCK);
+//    // v ? bsp_board_led_on(LED_HID_REP_IN) : bsp_board_led_off(LED_HID_REP_IN);
+
+//    return v = app_usbd_hid_kbd_led_state_get(&m_app_hid_kbd, APP_USBD_HID_KBD_LED_CAPS_LOCK);
+//    // v ? bsp_board_led_on(LED_HID_REP_OUT) : bsp_board_led_off(LED_HID_REP_OUT);
+// }
 
 
 /**

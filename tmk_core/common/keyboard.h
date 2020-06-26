@@ -63,6 +63,8 @@ void keyboard_setup(void);
 void keyboard_init(void);
 /* it runs repeatedly in main loop */
 void keyboard_task(void);
+void keyboard_post_init_kb(void);
+void keyboard_post_init_user(void);
 /* it runs when host LED status is updated */
 void keyboard_set_leds(uint8_t leds);
 

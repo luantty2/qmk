@@ -176,6 +176,7 @@ typedef struct {
     (key == KC_WWW_REFRESH      ?  AC_REFRESH : \
     (key == KC_WWW_FAVORITES    ?  AC_BOOKMARKS : 0)))))))))))))))))))))
 
+
 uint8_t has_anykey(report_keyboard_t* keyboard_report);
 uint8_t get_first_key(report_keyboard_t* keyboard_report);
 

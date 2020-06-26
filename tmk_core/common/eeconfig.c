@@ -26,6 +26,9 @@ void eeconfig_init(void)
 #ifdef STENO_ENABLE
     eeprom_update_byte(EECONFIG_STENOMODE,      0);
 #endif
+#ifdef OS_CYCLE //luanty
+    eeprom_update_byte(EECONFIG_OS_CYCLE,      0);
+#endif
 }
 
 /** \brief eeconfig enable
@@ -112,4 +115,17 @@ uint8_t eeconfig_read_audio(void)      { return eeprom_read_byte(EECONFIG_AUDIO)
  * FIXME: needs doc
  */
 void eeconfig_update_audio(uint8_t val) { eeprom_update_byte(EECONFIG_AUDIO, val); }
+#endif
+
+#ifdef OS_CYCLE
+/** \brief eeconfig read audio
+ *
+ * FIXME: needs doc
+ */
+uint8_t eeconfig_read_os(void)      { return eeprom_read_byte(EECONFIG_OS_CYCLE); }
+/** \brief eeconfig update audio
+ *
+ * FIXME: needs doc
+ */
+void eeconfig_update_os(uint8_t val) { eeprom_update_byte(EECONFIG_OS_CYCLE, val); }
 #endif

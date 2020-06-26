@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "action_util.h"
 #include "action.h"
 #include "wait.h"
+#include "ble_master.h"
 
 #ifdef DEBUG_ACTION
 #include "debug.h"
@@ -771,7 +772,8 @@ void register_code(uint8_t code)
         host_system_send(KEYCODE2SYSTEM(code));
     }
     else if IS_CONSUMER(code) {
-        host_consumer_send(KEYCODE2CONSUMER(code));
+        // host_consumer_send(KEYCODE2CONSUMER(code));
+        ble_send_consumer(KEYCODE2CONSUMER(code));
     }
 }
 
@@ -830,7 +832,8 @@ void unregister_code(uint8_t code)
         host_system_send(0);
     }
     else if IS_CONSUMER(code) {
-        host_consumer_send(0);
+        // host_consumer_send(0);
+        ble_send_consumer(0);  
     }
 }
 
