@@ -54,21 +54,8 @@
  tmk_core/common/progmem.h tmk_core/common/keycode.h \
  tmk_core/common/action_macro.h tmk_core/common/report.h \
  tmk_core/common/host.h tmk_core/common/report.h \
- tmk_core/common/host_driver.h tmk_core/common/debug.h \
- tmk_core/common/print.h tmk_core/common/util.h \
- tmk_core/common/nrf/printf.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_common.h \
- tmk_core/protocol/nrf/sdk15/sdk_config.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_os.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/app_util.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_macros.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_section_vars/nrf_section.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/strerror/nrf_strerror.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/src/nrf_log_internal.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_instance.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_types.h \
- /Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_types.h \
+ tmk_core/common/host_driver.h tmk_core/common/led.h \
+ tmk_core/common/debug.h tmk_core/common/print.h tmk_core/common/util.h \
  quantum/keycode_config.h tmk_core/common/eeconfig.h \
  tmk_core/common/action_code.h quantum/quantum_keycodes.h \
  quantum/rgblight.h quantum/rgblight_reconfig.h quantum/rgblight_modes.h \
@@ -214,37 +201,13 @@ tmk_core/common/report.h:
 
 tmk_core/common/host_driver.h:
 
+tmk_core/common/led.h:
+
 tmk_core/common/debug.h:
 
 tmk_core/common/print.h:
 
 tmk_core/common/util.h:
-
-tmk_core/common/nrf/printf.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_common.h:
-
-tmk_core/protocol/nrf/sdk15/sdk_config.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_os.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/app_util.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/util/sdk_macros.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_section_vars/nrf_section.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/strerror/nrf_strerror.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/src/nrf_log_internal.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_instance.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_types.h:
-
-/Users/apple/Downloads/nrf_qmk_firmware/nRF5_SDK_15.0.0_a53641a/components/libraries/experimental_log/nrf_log_types.h:
 
 quantum/keycode_config.h:
 

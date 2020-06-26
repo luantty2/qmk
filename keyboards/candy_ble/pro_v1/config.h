@@ -14,6 +14,10 @@
 	#define ENCODERS_PAD_B { PIN7 }
 #endif
 
+#ifdef DIP_SWITCH_ENABLE
+#define DIP_SWITCH_PINS { PIN21 }
+#endif
+
 #define TAP_CODE_DELAY 50
 #define IS_LEFT_HAND  true
 #define ENABLE_STARTUP_ADV_NOLIST

@@ -30,10 +30,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT Candy BLE
 #define DESCRIPTION QMK based keyboard
 
-#define BLE_NUS_MIN_INTERVAL 50
+#define BLE_NUS_MIN_INTERVAL 30
 #define BLE_NUS_MAX_INTERVAL 60
-#define BLE_HID_MAX_INTERVAL 80
-#define BLE_HID_SLAVE_LATENCY 3
+#define BLE_HID_MAX_INTERVAL 60
+#define BLE_HID_SLAVE_LATENCY 50
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -57,6 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
 #define ENCODER_ENABLE
+// #define DIP_SWITCH_ENABLE //look this
+// #define OS_CYCLE          //look this
 
 // #define WPM_ENABLE
 

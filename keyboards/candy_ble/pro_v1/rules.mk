@@ -9,8 +9,11 @@ NRFSDK_ROOT := $(NRFSDK15_ROOT) #Path to nRF SDK v15.0.0
 SRC += ssd1306.c
 SRC += encoder.c
 SRC += wpm.c
+# SRC += dip_switch.c
+# SRC += oled_driver.c
 
 TAP_DANCE_ENABLE=yes
+EXTRAKEY_ENABLE = yes
 
 # NRF_SEPARATE = master
 #CFLAGS += -DNRF_XTAL_32MHZ

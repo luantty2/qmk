@@ -23,6 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef ENCODER_ENABLE
   #include "encoder.h"
 #endif
+#ifdef DIP_SWITCH_ENABLE
+  #include "dip_switch.h"
+#endif
 #ifdef WPM_ENABLE
   #include "wpm.h"
 #endif
@@ -35,7 +38,19 @@ extern rgblight_config_t rgblight_config;
 #include "nrf_gpio.h"
 #include "nrf_delay.h"
 #include "nrf/i2c.h"
+
+// #include "usbd.c"
 #undef PACKED
+
+#define setPinOutput nrf_gpio_cfg_output
+#define writePinLow nrf_gpio_pin_clear
+#define writePinHigh nrf_gpio_pin_set
+
+// #define IS_LED_ON(leds, led_name)   ( (leds) & (1 << (led_name)))
+// #define IS_LED_OFF(leds, led_name)  (~(leds) & (1 << (led_name)))
+
+#define SET_CAPS_LOCK_LED() writePinLow(LED_PIN)
+#define RESET_CAPS_LOCK_LED() writePinHigh(LED_PIN)
 
 void nrfmicro_init();
 void nrfmicro_update();
@@ -45,9 +60,31 @@ void select_row(uint8_t row);
 matrix_row_t read_cols(void);
 static bool bootloader_flag = false;
 
+//caps leds not working
+/*
+void led_init_kb(void)
+{
+    // setPinOutput(LED_PIN);
+    // RESET_CAPS_LOCK_LED();
+    nrf_gpio_cfg_output(LED_PIN);
+    nrf_gpio_pin_set(LED_PIN);
+}
+
+void led_set_kb(uint8_t usb_led)
+{
+    // NRF_LOG_INFO("leds: %d", usb_led);
+    if (IS_LED_ON(usb_led, USB_LED_CAPS_LOCK)) {
+        nrf_gpio_pin_clear(LED_PIN);
+    } else {
+        nrf_gpio_pin_clear(LED_PIN);
+    }
+    led_set_user(usb_led);
+}
+*/
+
 void matrix_init_user() {
 #ifdef RGBLIGHT_ENABLE
-  rgblight_mode_noeeprom(35);
+  // rgblight_mode_noeeprom(35);
 #endif
 
   nrfmicro_init();
@@ -76,6 +113,12 @@ void matrix_init_user() {
 #ifdef ENCODER_ENABLE
   encoder_init();
 #endif
+
+#ifdef DIP_SWITCH_ENABLE
+  dip_switch_init();
+  dip_switch_read(false);
+#endif
+  // led_init_kb();
   
 }
 
@@ -90,5 +133,22 @@ void matrix_scan_user(void) {
   #ifdef WPM_ENABLE
     decay_wpm();
   #endif
+  #ifdef DIP_SWITCH_ENABLE
+  // dip_switch_read();
+  #endif
+
+  // if(kbd_status())
+  // {
+  //   nrf_gpio_pin_set(LED_PIN);
+  // }
+  // else
+  // {
+  //   nrf_gpio_pin_clear(LED_PIN);
+  // }
+
   nrfmicro_update();
 }
+
+
+
+

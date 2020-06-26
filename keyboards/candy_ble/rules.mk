@@ -6,9 +6,9 @@ NRF_DEBUG = no
 RGBLIGHT_ENABLE = yes
 MOUSEKEY_ENABLE = yes	# Mouse keys
 EXTRAKEY_ENABLE = yes	# Audio control and System control
-CONSOLE_ENABLE = yes	# Console for debug
-COMMAND_ENABLE = yes    # Commands for debug and configuration
-SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
+CONSOLE_ENABLE = no	# Console for debug
+COMMAND_ENABLE = no    # Commands for debug and configuration
+SLEEP_LED_ENABLE = no  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = no	    # USB Nkey Rollover
 CUSTOM_MATRIX = yes # This flag should be on for nrf52
 
@@ -20,6 +20,7 @@ MCU_FAMILY = NRF52
 MCU  = cortex-m4
 # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
 ARMV = 7
+# EXTRAFLAGS        += -flto 
 # If you want to be able to jump to bootloader from firmware on STM32 MCUs,
 # set the correct BOOTLOADER_ADDRESS. Either set it here, or define it in
 # ./bootloader_defs.h or in ./boards/<FOO>/bootloader_defs.h (if you have

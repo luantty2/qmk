@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EECONFIG_STENOMODE                          (uint8_t *)13
 // EEHANDS for two handed boards
 #define EECONFIG_HANDEDNESS         				(uint8_t *)14
+#define EECONFIG_OS_CYCLE							(uint8_t *)15 //luanty
 
 
 /* debug bit */
@@ -81,6 +82,11 @@ void eeconfig_update_backlight(uint8_t val);
 #ifdef AUDIO_ENABLE
 uint8_t eeconfig_read_audio(void);
 void eeconfig_update_audio(uint8_t val);
+#endif
+
+#ifdef OS_CYCLE
+uint8_t eeconfig_read_os(void);
+void eeconfig_update_os(uint8_t val);
 #endif
 
 #endif
